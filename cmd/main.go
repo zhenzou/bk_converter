@@ -2,11 +2,13 @@ package main
 
 import (
 	"context"
-	"gopkg.in/errgo.v2/errors"
 	"os"
+
+	"gopkg.in/errgo.v2/errors"
 
 	"github.com/zhenzou/bk_converter"
 	_ "github.com/zhenzou/bk_converter/dummy"
+	_ "github.com/zhenzou/bk_converter/ssj"
 	_ "github.com/zhenzou/bk_converter/timi"
 )
 
@@ -21,9 +23,9 @@ func loadConfig() bk_converter.Config {
 				Others:  nil,
 			},
 			To: bk_converter.Args{
-				Name:    "dummy",
+				Name:    "ssj",
 				In:      "",
-				Out:     "",
+				Out:     "/Users/zouzhen/Downloads/ssj.xls",
 				Mapping: "",
 				Others:  nil,
 			},

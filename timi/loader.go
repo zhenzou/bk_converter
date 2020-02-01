@@ -4,11 +4,11 @@ import (
 	"context"
 	"encoding/csv"
 	"fmt"
-	"gopkg.in/errgo.v2/errors"
 	"io"
 	"os"
 
 	"github.com/jszwec/csvutil"
+	"gopkg.in/errgo.v2/errors"
 
 	"github.com/zhenzou/bk_converter"
 )
@@ -36,7 +36,6 @@ func (t *TimiLoader) Load(ctx context.Context, args bk_converter.Args, ch chan<-
 	for {
 		record := Record{}
 		err := decoder.Decode(&record)
-		//fmt.Println("load:", record)
 		if err == io.EOF {
 			break
 		}
@@ -64,6 +63,7 @@ func ConvertToRecord(record Record) bk_converter.Record {
 	} else if record.Type == "收入" {
 		result.Type = bk_converter.In
 	}
+	result.FromAccount = "现金"
 	result.Remark = record.Remark
 	result.Amount = record.Amount
 	result.Time = record.Time.Time

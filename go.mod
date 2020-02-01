@@ -3,13 +3,17 @@ module github.com/zhenzou/bk_converter
 go 1.13
 
 require (
+	github.com/360EntSecGroup-Skylar/excelize v1.4.1
 	github.com/creack/pty v1.1.9 // indirect
+	github.com/extrame/ole2 v0.0.0-20160812065207-d69429661ad7 // indirect
+	github.com/extrame/xls v0.0.1 // indirect
 	github.com/jszwec/csvutil v1.2.2
 	github.com/kr/pretty v0.2.0 // indirect
 	github.com/kr/pty v1.1.8 // indirect
 	github.com/rogpeppe/go-internal v1.5.2 // indirect
 	github.com/stretchr/objx v0.2.0 // indirect
 	github.com/stretchr/testify v1.4.0
+	github.com/zuijinbuzai/excelclaim v0.0.0-20180827025936-4def09ac2262
 	go.uber.org/atomic v1.5.1 // indirect
 	go.uber.org/multierr v1.4.0
 	golang.org/x/crypto v0.0.0-20200128174031-69ecbb4d6d5d // indirect
