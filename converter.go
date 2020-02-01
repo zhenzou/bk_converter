@@ -4,12 +4,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
+
 	"go.uber.org/multierr"
 )
 
 var (
-	loaders map[string]Loader
-	stores  map[string]Store
+	loaders map[string]Loader = map[string]Loader{}
+	stores  map[string]Store  = map[string]Store{}
 )
 
 func Register(name string, i interface{}) {
@@ -55,12 +56,12 @@ func (c *Converter) Run(ctx context.Context) (err error) {
 		store := stores[to.Name]
 		if concurrent {
 			go func() {
-				if err2 := run(ctx, from.Args, loader, store); err2 != nil {
+				if err2 := run(ctx, from, to, loader, store); err2 != nil {
 					err = multierr.Append(err, err2)
 				}
 			}()
 		} else {
-			if err := run(ctx, to.Args, loader, store); err != nil {
+			if err := run(ctx, from, to, loader, store); err != nil {
 				return err
 			}
 		}
@@ -69,18 +70,18 @@ func (c *Converter) Run(ctx context.Context) (err error) {
 	return
 }
 
-func run(parent context.Context, args Args, loader Loader, store Store) (err error) {
+func run(parent context.Context, fromArgs, toArgs Args, loader Loader, store Store) (err error) {
 	ctx, cancel := context.WithCancel(parent)
 	defer cancel()
 	ch := make(chan Record)
 	go func() {
 		defer close(ch)
-		if err2 := loader.Load(ctx, args, ch); err2 != nil {
+		if err2 := loader.Load(ctx, fromArgs, ch); err2 != nil {
 			err = multierr.Append(err, err2)
 			return
 		}
 	}()
-	if err2 := store.Store(ctx, args, ch); err2 != nil {
+	if err2 := store.Store(ctx, toArgs, ch); err2 != nil {
 		err = multierr.Append(err, err2)
 	}
 	return err

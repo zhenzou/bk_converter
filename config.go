@@ -10,17 +10,12 @@ type Config struct {
 }
 
 type Conversion struct {
-	From struct {
-		Name string `yaml:"name"`
-		Args Args   `yaml:"args"`
-	}
-	To struct {
-		Name string `yaml:"name"`
-		Args Args   `yaml:"args"`
-	}
+	From Args `yaml:"from"`
+	To   Args `yaml:"to"`
 }
 
 type Args struct {
+	Name    string            `yaml:"name"`
 	In      string            `yaml:"in"`
 	Out     string            `yaml:"out"`
 	Mapping string            `yaml:"mapping"`
@@ -32,6 +27,7 @@ func (a *Args) MarshalYAML() ([]byte, error) {
 	for k, v := range a.Others {
 		m[k] = v
 	}
+	m["name"] = a.Name
 	m["in"] = a.In
 	m["out"] = a.Out
 	m["mapping"] = a.Mapping
@@ -44,10 +40,12 @@ func (a *Args) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	if err != nil {
 		return err
 	}
+	a.Name = m["name"]
 	a.In = m["in"]
 	a.Out = m["out"]
 	a.Mapping = m["mapping"]
 	a.Others = m
+	delete(m, "name")
 	delete(m, "in")
 	delete(m, "out")
 	delete(m, "mapping")

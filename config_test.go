@@ -11,6 +11,7 @@ import (
 
 func TestArgs_MarshalYAML(t *testing.T) {
 	type fields struct {
+		Name    string
 		In      string
 		Out     string
 		Mapping string
@@ -25,6 +26,7 @@ func TestArgs_MarshalYAML(t *testing.T) {
 		{
 			name: "not nil others",
 			fields: fields{
+				Name:    "name",
 				In:      "in",
 				Out:     "out",
 				Mapping: "path",
@@ -36,6 +38,7 @@ func TestArgs_MarshalYAML(t *testing.T) {
 			want: []byte(
 				`in: in
 mapping: path
+name: name
 other: other
 other1: other1
 out: out
@@ -45,6 +48,7 @@ out: out
 		{
 			name: "nil others",
 			fields: fields{
+				Name:    "name",
 				In:      "in",
 				Out:     "out",
 				Mapping: "path",
@@ -53,6 +57,7 @@ out: out
 			want: []byte(
 				`in: in
 mapping: path
+name: name
 out: out
 `),
 			wantErr: false,
@@ -61,6 +66,7 @@ out: out
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			a := Args{
+				Name:    tt.fields.Name,
 				In:      tt.fields.In,
 				Out:     tt.fields.Out,
 				Mapping: tt.fields.Mapping,
