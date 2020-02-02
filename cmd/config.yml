@@ -1,0 +1,12 @@
+concurrent: false
+conversions:
+  - from:
+      name: timi
+      in: timi.csv
+      out: ""
+      mapping: "mapping.timi.yml"
+    to:
+      name: ssj
+      in: ""
+      out: ssj.xlsx
+      mapping: ""

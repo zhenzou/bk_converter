@@ -5,10 +5,10 @@ import (
 	"encoding/csv"
 	"fmt"
 	"io"
-	"os"
 
 	"github.com/jszwec/csvutil"
 	"gopkg.in/errgo.v2/errors"
+	"gopkg.in/yaml.v2"
 
 	"github.com/zhenzou/bk_converter"
 )
@@ -21,7 +21,12 @@ type TimiLoader struct {
 }
 
 func (t *TimiLoader) Load(ctx context.Context, args bk_converter.Args, ch chan<- bk_converter.Record) error {
-	file, err := os.Open(args.In)
+	mapping, err := loadMapping(args.Mapping)
+	if err != nil {
+		return errors.Wrap(err)
+	}
+
+	file, err := bk_converter.Open(args.In)
 	if err != nil {
 		return errors.Wrap(err)
 	}
@@ -42,17 +47,26 @@ func (t *TimiLoader) Load(ctx context.Context, args bk_converter.Args, ch chan<-
 		if err != nil {
 			return err
 		}
-		ch <- ConvertToRecord(record)
+		ch <- ConvertToRecord(mapping, record)
 	}
 
 	return nil
 }
 
-func ConvertToRecord(record Record) bk_converter.Record {
+func loadMapping(name string) (mapping map[string]Class, err error) {
+	data, err := bk_converter.ReadAll(name)
+	if err != nil {
+		return nil, err
+	}
+	err = yaml.Unmarshal(data, &mapping)
+	return
+}
+
+func ConvertToRecord(mapping map[string]Class, record Record) bk_converter.Record {
 
 	result := bk_converter.Record{}
 
-	class, ok := NameMapping[record.Name]
+	class, ok := mapping[record.Name]
 	if !ok {
 		panic(fmt.Errorf("unknown name %s", record.Name))
 	}

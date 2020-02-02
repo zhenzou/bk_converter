@@ -2,7 +2,6 @@ package ssj
 
 import (
 	"context"
-	"fmt"
 	"strconv"
 
 	"github.com/360EntSecGroup-Skylar/excelize"
@@ -35,7 +34,6 @@ func (d *SSJStore) Store(ctx context.Context, args bk_converter.Args, ch <-chan 
 	sheetOut.WriteRow(header...)
 
 	for record := range ch {
-		fmt.Println("r:", record)
 		row := ConvertToRow(record)
 		if record.Type == bk_converter.In {
 			sheetIn.WriteRow(row...)

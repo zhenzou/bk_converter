@@ -1,0 +1,84 @@
+一般:
+  first: 其他杂项
+  second: 其他支出
+丽人:
+  first: 医疗保健
+  second: 美容费
+交通:
+  first: 行车交通
+  second: 公共交通
+人情:
+  first: 人情往来
+  second: 送礼请客
+住房:
+  first: 居家物业
+  second: 房租
+借款:
+  first: 人情往来
+  second: 借款
+公积金:
+  first: 其他收入
+  second: 公积金
+兼职:
+  first: 职业收入
+  second: 兼职收入
+医疗:
+  first: 医疗保健
+  second: 治疗费
+奖金:
+  first: 职业收入
+  second: 奖金收入
+娱乐:
+  first: 休闲娱乐
+  second: 休闲玩乐
+学习:
+  first: 学习进修
+  second: 数码装备
+家居:
+  first: 居家物业
+  second: 家具家居
+工资:
+  first: 职业收入
+  second: 工资收入
+投资:
+  first: 金融保险
+  second: 投资亏损
+数码:
+  first: 购物剁手
+  second: 数码电器
+旅游:
+  first: 休闲娱乐
+  second: 旅游度假
+日用品:
+  first: 居家物业
+  second: 日常用品
+服饰:
+  first: 购物剁手
+  second: 衣服裤子
+理财:
+  first: 职业收入
+  second: 投资收入
+用餐:
+  first: 食品酒水
+  second: 早午晚餐
+红包:
+  first: 其他收入
+  second: 红包
+贷款:
+  first: 其他收入
+  second: 贷款
+还款:
+  first: 其他收入
+  second: 还款
+还贷:
+  first: 金融保险
+  second: 按揭还款
+退款:
+  first: 其他收入
+  second: 退款
+通讯:
+  first: 交流通讯
+  second: 手机费
+零食:
+  first: 食品酒水
+  second: 水果零食
